@@ -12,13 +12,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::orderBy('name', 'asc')->get();
+        $data = Product::orderBy('id', 'asc')->get();
 
         return response()->json([
             'status' => true,
             'message' => 'Data berhasil ditemukan',
             'data' => $data
-        ],201);
+        ],200);
     }
 
     /**
