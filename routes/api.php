@@ -14,3 +14,5 @@ Route::get('/product', [ProductController::class, 'index']);
 
 
 Route::post('/register',[AuthController::class, 'registerUser']);
+
+Route::post('/login',[AuthController::class, 'loginUser']);
