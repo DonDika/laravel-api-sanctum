@@ -42,7 +42,7 @@ class AuthController extends Controller
     }
 
 
-    public function loginUser(Request $request)
+    public function loginUserOne(Request $request)
     {
         $rules = [
             'email' => 'required|email',
@@ -65,19 +65,16 @@ class AuthController extends Controller
             ], 401);
         }
 
-
         $dataUser = User::where('email', $request->email)
                     ->first();
+
         return response()->json([
             'error' => false,
             'message' => 'berhasil login',
             'token' => $dataUser->createToken('api-product')->plainTextToken
         ], 200);
 
-
-
     }
-
 
 
 }

@@ -10,8 +10,14 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/', function(){
+    return response()->json([
+        'error' => true,
+        'message' => 'akses tidak diperbolehkan'
+    ], 401);
+});
 
+Route::get('/product', [ProductController::class, 'getProduct'])->middleware('auth:sanctum');
 
 Route::post('/register',[AuthController::class, 'registerUser']);
 
