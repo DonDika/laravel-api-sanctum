@@ -15,10 +15,12 @@ Route::get('/', function(){
         'error' => true,
         'message' => 'akses tidak diperbolehkan'
     ], 401);
-});
+})->name('login');
 
-Route::get('/product', [ProductController::class, 'getProduct'])->middleware('auth:sanctum');
 
 Route::post('/register',[AuthController::class, 'registerUser']);
-
 Route::post('/login',[AuthController::class, 'loginUser']);
+
+
+Route::get('/product', [ProductController::class, 'getProduct'])->middleware('auth:sanctum');
+Route::post('/product',[ProductController::class, 'postProduct'])->middleware('auth:sanctum');

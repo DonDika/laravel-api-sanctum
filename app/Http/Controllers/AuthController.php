@@ -42,7 +42,7 @@ class AuthController extends Controller
     }
 
 
-    public function loginUserOne(Request $request)
+    public function loginUser(Request $request)
     {
         $rules = [
             'email' => 'required|email',
