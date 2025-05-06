@@ -27,3 +27,7 @@ Route::get('/product', [ProductController::class, 'getProduct'])
 
 Route::post('/product',[ProductController::class, 'postProduct'])
         ->middleware('auth:sanctum','ability:product-post');
+
+
+
+        

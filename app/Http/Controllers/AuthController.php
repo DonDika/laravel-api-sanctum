@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,10 +69,21 @@ class AuthController extends Controller
         $dataUser = User::where('email', $request->email)
                     ->first();
 
+        //cek role user
+        $roleUser = Role::join('user_role', 'user_role.role_id', '=', 'roles.id')
+                    ->join('users', 'users.id', '=', 'user_role.user_id')
+                    ->where('user_id', $dataUser->id)
+                    ->pluck('roles.role_name')
+                    ->toArray();
+
+        if (empty($roleUser)) {
+            $roleUser = ['product-list'];
+        }
+
         return response()->json([
             'error' => false,
             'message' => 'berhasil login',
-            'token' => $dataUser->createToken('api-product')->plainTextToken
+            'token' => $dataUser->createToken('api-product', $roleUser)->plainTextToken
         ], 200);
 
     }
